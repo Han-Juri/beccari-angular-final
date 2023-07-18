@@ -1,0 +1,5 @@
+<button (click)="onCreateUser()" class="example-icon" type="button" mat-button color="primary">
+    <mat-icon>add</mat-icon> Agregar alumno
+</button>
+
+<app-users-table [dataSource]="students" (deleteStudent)="onDeleteStudent($event)" (editStudent)="studentToEdit($event)"></app-users-table>
