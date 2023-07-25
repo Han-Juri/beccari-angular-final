@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { Student } from './models';
+import { StudentService } from './student.service';
+import { NotifierService } from 'src/app/core/services/notifier.service';
+import { Observable } from 'rxjs';
 
-const ELEMENT_DATA: Student[] = [
-  {id: 1, name: 'Juri', surname: 'Han', email: 'hanJuri@testmail', password: '1235'}
-];
+//const ELEMENT_DATA: Student[] =
 
 @Component({
   selector: 'app-users',
@@ -15,9 +15,13 @@ const ELEMENT_DATA: Student[] = [
 })
 export class UsersComponent {
   
-  public students: Student[] = ELEMENT_DATA;
+  public students: Observable<Student[]>;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog, private studentService: StudentService, private notifier: NotifierService) {
+    
+    this.studentService.loadStudents()
+    this.students = this.studentService.getUsers()
+  }
 
   onCreateUser(): void {
     const dialogRef = this.matDialog.open(UserFormDialogComponent)
@@ -25,27 +29,20 @@ export class UsersComponent {
     dialogRef.afterClosed().subscribe({
       next: (v) => {
         if (v){
-          this.students = [
-            ...this.students,
-            {
-              id: this.students.length + 1,
+          this.studentService.createStudent({
               name: v.name,
-              surname: v.surname,
               email: v.email,
-              password: v.password
-            }
-          ]
-        console.log('Recibimos el valor', v)
-        } else {
-          console.log('Se cancelo')
+              password: v.password,
+              surname: v.surname,
+            });
         }
       }
     })
   }
 
-  onDeleteStudent(student: Student): void {
-    if (confirm(`¿Esta seguro de eliminar a ${student.name}?`)) {
-      this.students = this.students.filter((s) => s.id != student.id)
+  onDeleteStudent(studentToDelete: Student): void {
+    if (confirm(`¿Esta seguro de eliminar a ${studentToDelete.name}?`)) {
+      this.studentService.deleteStudentByID(studentToDelete.id)
     }
   }
 
@@ -55,16 +52,9 @@ export class UsersComponent {
     })
 
     dialogRef.afterClosed().subscribe({
-      next: (data) => {
-        if (data) {
-          this.students = this.students.map((student) => {
-
-
-
-            return student.id === studentToEdit.id 
-            ? {...student, ...data}
-            :  student
-          })
+      next: (studentUpdated) => {
+        if (studentUpdated) {
+          this.studentService.updateStudentByID(studentToEdit.id, studentUpdated)
         }
       }
     })
