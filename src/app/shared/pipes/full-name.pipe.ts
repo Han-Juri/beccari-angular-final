@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Student } from 'src/app/dashboard/Components/users/models';
+import { User } from 'src/app/dashboard/pages/users/models';
 
 @Pipe({
   name: 'fullName'
 })
 export class FullNamePipe implements PipeTransform {
 
-  transform(student: Student, ...args: unknown[]): unknown {
-    return `${student.name} ${student.surname}`;
+  transform(user: User, ...args: unknown[]): unknown {
+    return `${user.name} ${user.surname}`;
   }
 
 }

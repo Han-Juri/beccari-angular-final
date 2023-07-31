@@ -1,0 +1,5 @@
+<button (click)="onCreateStudent()" class="example-icon m-3" type="button" mat-button color="primary">
+    <mat-icon>add</mat-icon> Agregar estudiante
+</button>
+
+<app-student-table [dataSource]="(students | async) || []" (deleteStudent)="onDeleteStudent($event)" (editStudent)="studentToEdit($event)"></app-student-table>

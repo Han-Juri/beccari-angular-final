@@ -1,0 +1,5 @@
+<button (click)="onCreateCourse()" class="example-icon m-3" type="button" mat-button color="primary">
+    <mat-icon>add</mat-icon> Agregar curso
+</button>
+
+<app-courses-table [dataSource]="(courses | async) || []" (deleteCourse)="onDeleteCourse($event)" (editCourse)="courseToEdit($event)"></app-courses-table>

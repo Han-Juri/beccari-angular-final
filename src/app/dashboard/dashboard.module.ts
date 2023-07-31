@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HomeModule } from './Components/home/home.module';
+import { HomeModule } from './pages/home/home.module';
 import { SharedModule } from '../shared/shared.module';
-import { UsersModule } from './Components/users/users.module';
-
-
+import { UsersModule } from './pages/users/users.module';
+import { StudentsModule } from './pages/students/students.module';
+import { CoursesModule } from './pages/courses/courses.module';
+import {  Router, RouterModule } from '@angular/router';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,25 @@ import { UsersModule } from './Components/users/users.module';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatListModule,
     SharedModule,
     HomeModule,
-    UsersModule
+    UsersModule,
+    StudentsModule,
+    CoursesModule
   ],
   exports : [
     DashboardComponent
   ]
 })
-export class DashboardModule { }
+export class DashboardModule { 
+
+  constructor(private router:Router) {}
+
+  logout(): void {
+    this.router.navigate(['auth', 'login'])
+  }
+}

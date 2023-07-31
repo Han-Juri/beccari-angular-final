@@ -1,6 +1,12 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      
+      <mat-nav-list>
+        <a routerLink="home" mat-list-item>Home</a>
+        <a routerLink="users" mat-list-item>Usuarios</a>
+        <a routerLink="students" mat-list-item>Alumnos</a>
+        <a routerLink="courses" mat-list-item>Cursos</a>
+        <a (click)="logout()" mat-list-item>Cerrar sesion</a>
+      </mat-nav-list>
     </mat-drawer>
   
     <div class="example-sidenav-content">
@@ -12,8 +18,7 @@
             <span class="example-spacer"></span>
         </mat-toolbar>
         <main>
-            <!-- <app-home></app-home> -->
-            <app-users></app-users>
+            <router-outlet></router-outlet>
         </main>
     </div>
   
