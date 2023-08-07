@@ -14,11 +14,13 @@ import { Observable } from 'rxjs';
 export class UsersComponent {
   
   public users: Observable<User[]>;
+  public isLoading$: Observable<boolean>
 
   constructor(private matDialog: MatDialog, private userService: UserService, private notifier: NotifierService) {
     
     this.userService.loadUsers()
     this.users = this.userService.getUsers()
+    this.isLoading$ = userService.isLoading$
   }
 
   onCreateUser(): void {

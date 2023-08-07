@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { CreateStudentData, Student, UpdateStudentData } from './models';
-import { BehaviorSubject, Observable, Subject, delay, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/enviroments/enviroment';
 
-const STUDENT_DB: Observable<Student[]> =  of([
-  {id: 1, name: 'Li', surname: 'Mei', email: 'limei@testmail', password: '1235'},
-  {id: 2, name: 'Sub', surname: 'Zero', email: 'sub_zero@testmail', password: '1235'},
-  {id: 3, name: 'Liu', surname: 'Kang', email: 'liukang@testmail', password: '1235'}
-]).pipe(delay(1000))
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +20,7 @@ export class StudentService {
   private _students$ = new BehaviorSubject<Student[]>([])
   private students$ = this._students$.asObservable()
  
-  constructor(private notifier: NotifierService ) { 
+  constructor(private notifier: NotifierService,  private httpClient: HttpClient) { 
     this.sendNotification$.subscribe({
       next: (message => alert(message))
     })
@@ -34,8 +31,15 @@ export class StudentService {
   }
 
   loadStudents(): void {
-    STUDENT_DB.subscribe({
-      next: (studentsFromDB) => this._students$.next(studentsFromDB)
+    
+    this.httpClient.get<Student[]> (enviroment.baseApiUrl +'/students').subscribe({
+      next: (resp) => {
+        this._students$.next(resp)
+      },
+      error: () => {
+        this.notifier.showError('No se pudieron cargar los estudiantes')
+      },
+     
     })
   }
 
@@ -43,32 +47,40 @@ export class StudentService {
     return this.students$
   }
 
-  createStudent(student: CreateStudentData): void {
-    this.students$.pipe(take(1)).subscribe({
-      next: (currentArray) => {
-        this._students$.next([...currentArray, {...student, id: currentArray.length + 1}]);
-        this.notifier.showSuccess('Usuario creado')
+  getStudentByID(id: number): Observable<Student | undefined> {
+    return this.students$.pipe(
+      map((students) => students.find((s) => s.id === id)), take(1))
+  }
+
+  createStudent(payLoad: CreateStudentData): void {
+    
+    this.httpClient.post<Student>(enviroment.baseApiUrl +'/students', payLoad)
+    .pipe(
+      mergeMap((studentCreate) => this.students$.pipe(take(1), map((currentArray) => [...currentArray, studentCreate])))
+    )
+    .subscribe({
+      next: (updatedArray) => {
+        this._students$.next(updatedArray)
       }
     })
   }
 
   updateStudentByID(id: Number, updatedStudent: UpdateStudentData): void {
 
-    this.students$.pipe(take(1)).subscribe({
-      next: (currentArray) => {
-        this._students$.next(
-          currentArray.map((s) => s.id === id ? { ...s, ...updatedStudent  } : s)
-        )
-      }
+    this.httpClient.put(enviroment.baseApiUrl +'/students/' + id, updatedStudent).subscribe({
+      next: () => this.loadStudents()
     })
   }
 
   deleteStudentByID (id: number): void {
-    this._students$.pipe(take(1)).subscribe({
-      next: (currentArray) =>{ this._students$.next(currentArray.filter((s) => s.id != id));
-      this.notifier.showSuccess('Usuario eliminado')}
-    })
-  }
     
+    this.httpClient.delete(enviroment.baseApiUrl +'/students/' + id)
+    .pipe(
+      mergeMap(() => this.students$.pipe(take(1), map((currentArray) => currentArray.filter((s) => s.id !== id )))))
+      .subscribe({
+        next: (updatedArray) => this._students$.next(updatedArray)
+      })
+  }
+
 }
 

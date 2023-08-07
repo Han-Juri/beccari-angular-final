@@ -8,8 +8,9 @@ import { SharedModule } from '../shared/shared.module';
 import { UsersModule } from './pages/users/users.module';
 import { StudentsModule } from './pages/students/students.module';
 import { CoursesModule } from './pages/courses/courses.module';
-import {  Router, RouterModule } from '@angular/router';
-import {MatListModule} from '@angular/material/list';
+import { Router, RouterModule } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {MatListModule} from '@angular/material/list';
   imports: [
     CommonModule,
     RouterModule,
+    DashboardRoutingModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,

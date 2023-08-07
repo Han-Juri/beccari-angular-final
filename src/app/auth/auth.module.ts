@@ -6,6 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatCardModule } from '@angular/material/card'; 
 import { RouterModule } from '@angular/router';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     SharedModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    AuthRoutingModule
   ],
   exports: [
     AuthComponent

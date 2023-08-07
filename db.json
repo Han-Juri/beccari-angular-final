@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Juri",
+      "surname": "Han",
+      "email": "hanJuri@testmail",
+      "password": "1235",
+      "token": "sorlhkyignfmdlypwiru"
+    },
+    {
+      "name": "redgsdf",
+      "email": "aergdfg",
+      "password": "aergadtrghrthg",
+      "surname": "aergrtfg",
+      "token": "ufKVX1GFJd4dZhLzMn6s",
+      "id": 2
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Li",
+      "surname": "Mei",
+      "email": "limei@testmail",
+      "password": "1235"
+    },
+    {
+      "id": 2,
+      "name": "Sub",
+      "surname": "Zero",
+      "email": "sub_zero@testmail",
+      "password": "1235"
+    },
+    {
+      "id": 3,
+      "name": "Liu",
+      "surname": "Kang",
+      "email": "liukang@testmail",
+      "password": "1235"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Mate",
+      "surname": "Matica",
+      "email": "'matematica@testmail'",
+      "password": "'1235'"
+    },
+    {
+      "id": 2,
+      "name": "Len",
+      "surname": "Gua",
+      "email": "lengua@testmail",
+      "password": "1235"
+    },
+    {
+      "id": 3,
+      "name": "His",
+      "surname": "Toria",
+      "email": "historia@testmail",
+      "password": "1235"
+    }
+  ]
+}

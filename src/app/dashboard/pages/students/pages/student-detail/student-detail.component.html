@@ -1,5 +1,11 @@
-<button routerLink=".." mat-icon-button>
-    <mat-icon>arrow_back</mat-icon>
-</button>
-
-<p>student-detail works!</p>
+<div *ngIf="student">
+    <button routerLink=".." mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  
+    <h2>Detalles del estudiante</h2>
+    <p>ID: {{ student.id }}</p>
+    <p>Name: {{ student.name }}</p>
+    <p>Surname: {{ student.surname }}</p>
+    <p>Email: {{ student.email }}</p>
+  </div>

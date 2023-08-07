@@ -2,4 +2,9 @@
     <mat-icon>add</mat-icon> Agregar usuario
 </button>
 
-<app-users-table [dataSource]="(users | async) || []" (deleteUser)="onDeleteUser($event)" (editUser)="userToEdit($event)"></app-users-table>
+
+<div *ngIf="isLoading$ | async; else notLoading">Esta cargando...</div>
+
+<ng-template #notLoading>
+    <app-users-table [dataSource]="(users | async) || []" (deleteUser)="onDeleteUser($event)" (editUser)="userToEdit($event)"></app-users-table>
+</ng-template>

@@ -10,12 +10,15 @@
     </mat-drawer>
   
     <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
-            <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-              <mat-icon>menu</mat-icon>
-            </button>
-            <span>My App</span>
-            <span class="example-spacer"></span>
+        <mat-toolbar class="flex card-container blue-container overflow-hidden" color="primary">
+              <button (click)="drawer.toggle()" mat-icon-button class="example-icon flex-none flex align-items-center justify-content-center" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+              </button>
+              <span class="flex-grow-1 flex align-items-center justify-content-center">The Fighting School</span>
+              <span class="example-spacer"></span>
+            <div class="flex-none flex align-items-center justify-content-center">
+              <span *ngIf="authUser$ | async; let authUser">Bienvenid@ {{ authUser?.name }} {{ authUser?.surname }}!!</span>
+            </div>
         </mat-toolbar>
         <main>
             <router-outlet></router-outlet>
