@@ -1,0 +1,19 @@
+<div *ngIf="students">
+  <button routerLink=".." mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <h2>Detalles del curso</h2>
+
+  <div *ngFor="let student of students">
+    <p>ID: {{ student.id }}</p>
+    <p>Name: {{ student.name }}</p>
+    <p>Surname: {{ student.surname }}</p>
+    <p>Email: {{ student.email }}</p>
+    <hr>
+  </div>
+
+  <div>
+    <p>Total de alumnos: {{ students.length }}</p>
+  </div>
+</div>

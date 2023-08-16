@@ -23,21 +23,24 @@
       "name": "Li",
       "surname": "Mei",
       "email": "limei@testmail",
-      "password": "1235"
+      "password": "1235",
+      "comissionId": 2
     },
     {
       "id": 2,
       "name": "Sub",
       "surname": "Zero",
       "email": "sub_zero@testmail",
-      "password": "1235"
+      "password": "1235",
+      "comissionId": 2
     },
     {
       "id": 3,
       "name": "Liu",
       "surname": "Kang",
       "email": "liukang@testmail",
-      "password": "1235"
+      "password": "1235",
+      "comissionId": 1
     }
   ],
   "courses": [
@@ -54,6 +57,29 @@
       "surname": "Gua",
       "email": "lengua@testmail",
       "password": "1235"
+    },
+    {
+      "id": 3,
+      "name": "His",
+      "surname": "Toria",
+      "email": "historia@testmail",
+      "password": "1235"
+    }
+  ],
+  "comissions": [
+    {
+      "id": 1,
+      "name": "Mate",
+      "surname": "Matica",
+      "email": "'matematica@testmail'",
+      "password": "'1235'"
+    },
+    {
+      "name": "Lenlll",
+      "surname": "Guaff",
+      "email": "lengua@testmail",
+      "password": "1235",
+      "id": 2
     },
     {
       "id": 3,

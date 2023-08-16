@@ -7,6 +7,8 @@ import { StudentsComponent } from "./pages/students/students.component";
 import { StudentDetailComponent } from "./pages/students/pages/student-detail/student-detail.component";
 import { CoursesComponent } from "./pages/courses/courses.component";
 import { CourseDetailComponent } from "./pages/courses/pages/course-detail/course-detail.component";
+import { ComissionsComponent } from "./pages/comissions/comissions.component";
+import { ComissionsDetailComponent } from "./pages/comissions/pages/comissions-detail/comissions-detail.component";
 
 @NgModule({
     imports: [
@@ -38,6 +40,14 @@ import { CourseDetailComponent } from "./pages/courses/pages/course-detail/cours
               {
                 path: 'courses/:id',
                 component: CourseDetailComponent
+              },
+              {
+                path: 'comissions',
+                component: ComissionsComponent
+              },
+              {
+                path: 'comissions/:id',
+                component: ComissionsDetailComponent
               },
               {
                 path: '**',

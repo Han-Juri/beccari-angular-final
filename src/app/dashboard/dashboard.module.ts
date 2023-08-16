@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UsersModule } from './pages/users/users.module';
 import { StudentsModule } from './pages/students/students.module';
 import { CoursesModule } from './pages/courses/courses.module';
+import { ComissionsModule } from './pages/comissions/comissions.module';
 import { Router, RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -27,6 +28,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     HomeModule,
     UsersModule,
     StudentsModule,
+    ComissionsModule,
     CoursesModule
   ],
   exports : [

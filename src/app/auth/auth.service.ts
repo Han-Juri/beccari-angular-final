@@ -6,14 +6,16 @@ import { LoginData } from "./models";
 import { User } from '../dashboard/pages/users/models';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { enviroment } from 'src/enviroments/enviroment';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    private _authUser$ = new BehaviorSubject<User | null>(null)
-    public authUser$ = this._authUser$.asObservable()
+    /* private _authUser$ = new BehaviorSubject<User | null>(null)
+    public authUser$ = this._authUser$.asObservable() */
 
-    constructor(private router: Router, private notifier: NotifierService, private httpClient: HttpClient) {}
+    constructor(private router: Router, private notifier: NotifierService, private httpClient: HttpClient, private store: Store) {}
 
     isAuntenticated(): Observable<boolean> {
        
@@ -22,6 +24,13 @@ export class AuthService {
                 token: localStorage.getItem('token') || ''
             }
         }).pipe(map((result) => {
+
+            if(result.length) {
+                const authUser = result[0]
+                //this._authUser$.next(authUser)
+                this.store.dispatch(AuthActions.setAuthUser({ payLoad: authUser }))
+            }
+
             return !!result.length
         }))
     }
@@ -37,12 +46,14 @@ export class AuthService {
             next: (response) => {
                 const authUser = response[0]
                 if (response.length) {
-                    this._authUser$.next(response[0])
+                    //this._authUser$.next(response[0])
+                    this.store.dispatch(AuthActions.setAuthUser({ payLoad: authUser }))
                     this.router.navigate(['/dashboard'])
                     localStorage.setItem('token', authUser.token)
                 } else {
                     this.notifier.showError('Email o contraseña incorrectos')
-                    this._authUser$.next(null)
+                    //this._authUser$.next(null)
+                    this.store.dispatch(AuthActions.setAuthUser({ payLoad: authUser }))
                 }
             },
             error : (err => {
@@ -51,5 +62,8 @@ export class AuthService {
                 }
             })
         })
+    }
+    public logout(): void {
+        this.store.dispatch(AuthActions.setAuthUser({ payLoad: null }))
     }
 }

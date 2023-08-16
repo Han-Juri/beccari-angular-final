@@ -82,5 +82,9 @@ export class StudentService {
       })
   }
 
+  getStudentsByComissionId(comissionId: number): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(enviroment.baseApiUrl + `/students?comissionId=${comissionId}`)
+  }
+
 }
 

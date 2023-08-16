@@ -1,20 +1,19 @@
-export interface Student {
+export interface Comission {
     id: number;
     name: string;
     surname: string;
     email: string;
     password: string;
-    comissionID: number;
 }
 
-export interface CreateStudentData {
+export interface CreateComissionData {
     name: string;
     surname: string;
     email: string;
     password: string;
 }
 
-export interface UpdateStudentData {
+export interface UpdateComissionData {
     name?: string;
     surname?: string;
     email?: string;
