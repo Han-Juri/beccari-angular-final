@@ -17,7 +17,7 @@ export class CoursesService {
   private sendNotification$ = new Subject<string>()
 
   private _courses$ = new BehaviorSubject<Course[]>([])
-  private courses$ = this._courses$.asObservable()
+  public courses$ = this._courses$.asObservable()
  
   constructor(private notifier: NotifierService, private httpClient: HttpClient) { 
     this.sendNotification$.subscribe({

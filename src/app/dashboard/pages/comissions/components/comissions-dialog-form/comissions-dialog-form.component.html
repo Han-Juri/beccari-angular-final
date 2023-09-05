@@ -1,45 +1,15 @@
-<h2 mat-dialog-title>{{ editingComission ? 'Editar a ' + editingComission.name + ' ' + editingComission.surname : 'Agregar usuario' }}</h2>
+<h2 mat-dialog-title>{{ editingComission ? 'Edición de ' +  editingComission.courseId : 'Agregar comision' }}</h2>
 <div mat-dialog-content>    
     <form [formGroup]="comissionForm" class="grid">
         <div class="col-6 field">
-            <mat-form-field>
-                <mat-label>Nombre</mat-label>
-                <input formControlName="name" matInput type="text" name="name">
-                <mat-error *ngIf="nameControl.hasError('required')">
-                    Este campo es requerido.
-                </mat-error>
+            <mat-form-field class="w-full">
+                <mat-label>Curso</mat-label>
+                <mat-select [formControl]="courseIdControl">
+                    <mat-option [value]="course.id" *ngFor="let course of courseOptions$ | async">{{ course.name }}</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 
-        <div class="col-6 field">
-            <mat-form-field>
-                <mat-label>Apellido</mat-label>
-                <input formControlName="surname" matInput type="text" name="surname">
-                <mat-error *ngIf="surnameControl.hasError('required')">
-                    Este campo es requerido.
-                </mat-error>
-            </mat-form-field>
-        </div>
-
-        <div class="col-6 field">
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input formControlName="email" matInput type="email" name="email">
-                <mat-error *ngIf="emailControl.hasError('required')">
-                    Este campo es requerido.
-                </mat-error>
-            </mat-form-field>
-        </div>
-
-        <div class="col-6 field">
-            <mat-form-field>
-                <mat-label>Contraseña</mat-label>
-                <input formControlName="password" matInput type="password" name="password">
-                <mat-error *ngIf="passwordControl.hasError('required')">
-                    Este campo es requerido.
-                </mat-error>
-            </mat-form-field>
-        </div>
     </form>
 </div>
 <div mat-dialog-actions class="flex justify-content-end">

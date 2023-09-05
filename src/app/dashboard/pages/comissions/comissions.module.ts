@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComissionsComponent } from './comissions.component';
 import { ComissionsTableComponent } from './components/comissions-table/comissions-table.component';
-import { ComissionsDetailComponent } from './pages/comissions-detail/comissions-detail.component';
+import { ComissionDetailComponent } from './pages/comissions-detail/comissions-detail.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ComissionsDialogFormModule } from './components/comissions-dialog-form/comissions-dialog-form.module';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { ComissionsEffects } from './store/comissions.effects';
+import { ComissionEffects } from './store/comission.effects';
 import { StoreModule } from '@ngrx/store';
-import { comissionsFeature } from './store/comissions.reducer';
+import { comissionFeature } from './store/comission.reducer';
 
 
 
@@ -17,15 +17,15 @@ import { comissionsFeature } from './store/comissions.reducer';
   declarations: [
     ComissionsComponent,
     ComissionsTableComponent,
-    ComissionsDetailComponent
+    ComissionDetailComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ComissionsDialogFormModule,
     RouterModule,
-    StoreModule.forFeature(comissionsFeature),
-    EffectsModule.forFeature([ComissionsEffects])
+    StoreModule.forFeature(comissionFeature),
+    EffectsModule.forFeature([ComissionEffects])
   ],
   exports: [
     ComissionsComponent
